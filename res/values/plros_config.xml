@@ -31,4 +31,7 @@
 
     <!-- Define Oneplus specific battery health node  -->
     <string name="config_battery_health_oneplus"></string>
+
+    <!-- Wheter to show device model -->
+    <bool name="config_show_device_model">true</bool>
 </resources>
