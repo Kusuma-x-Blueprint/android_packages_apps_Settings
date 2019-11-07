@@ -148,4 +148,8 @@
     <string name="qs_quick_pulldown_right">Right side</string>
     <string name="qs_quick_pulldown_left">Left side</string>
     <string name="qs_quick_pulldown_footer">Swiping down from the selected edge of the status bar opens Quick Settings directly.</string>
+
+    <!-- Three-fingers-swipe to screenshot -->
+    <string name="three_finger_gesture">Swipe to screenshot</string>
+    <string name="three_finger_gesture_summary">Swipe down with three fingers to take a screenshot</string>
 </resources>
