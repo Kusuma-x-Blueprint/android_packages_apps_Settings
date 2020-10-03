@@ -163,4 +163,8 @@
     <!-- Strict standby -->
     <string name="strict_standby_policy_title">Strict background process</string>
     <string name="strict_standby_policy_summary">When dismissing from recents, apps with restricted battery usage will be force stopped.</string>
+
+    <!-- Full screen apps -->
+    <string name="display_cutout_force_fullscreen_title">Full screen apps</string>
+    <string name="display_cutout_force_fullscreen_summary">Makes apps ignore device cutout space</string>
 </resources>
