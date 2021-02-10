@@ -95,4 +95,7 @@
     <!-- Vol up + vol down action -->
     <string name="vol_up_down_action_title">Hold volume up and volume down key</string>
     <string name="vol_up_down_action_none">Accessibility shortcuts</string>
+
+    <!-- Deep Sleep percentage in device info -->
+    <string name="status_sleep_time">Deep sleep</string>
 </resources>
