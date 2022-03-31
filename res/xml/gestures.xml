@@ -46,12 +46,47 @@
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController" />
 
-    <Preference
-        android:key="gesture_double_tap_power_input_summary"
-        android:title="@string/double_tap_power_for_camera_title"
-        android:fragment="com.android.settings.gestures.DoubleTapPowerSettings"
-        settings:searchable="false"
-        settings:controller="com.android.settings.gestures.DoubleTapPowerPreferenceController" />
+    <lineageos.preference.SecureSettingListPreference
+        android:key="power_double_tap_action"
+        android:title="@string/power_double_tap_action_title"
+        android:summary="%s"
+        android:dialogTitle="@string/power_double_tap_action_title"
+        android:entries="@array/power_double_tap_action_entries"
+        android:entryValues="@array/power_double_tap_action_values"
+        android:defaultValue="camera" />
+
+    <lineageos.preference.SecureSettingListPreference
+        android:key="power_vol_down_action"
+        android:title="@string/power_vol_down_action_title"
+        android:summary="%s"
+        android:dialogTitle="@string/power_vol_down_action_title"
+        android:entries="@array/power_vol_down_action_entries"
+        android:entryValues="@array/power_vol_down_action_values"
+        android:defaultValue="screenshot" />
+
+    <lineageos.preference.SecureSettingListPreference
+        android:key="power_vol_up_action"
+        android:title="@string/power_vol_up_action_title"
+        android:summary="%s"
+        android:dialogTitle="@string/power_vol_up_action_title"
+        android:entries="@array/power_vol_up_action_entries"
+        android:entryValues="@array/power_vol_up_action_values"
+        android:defaultValue="none" />
+
+    <lineageos.preference.SecureSettingListPreference
+        android:key="vol_up_down_action"
+        android:title="@string/vol_up_down_action_title"
+        android:summary="%s"
+        android:dialogTitle="@string/vol_up_down_action_title"
+        android:entries="@array/vol_up_down_action_entries"
+        android:entryValues="@array/vol_up_down_action_values"
+        android:defaultValue="none" />
+
+    <lineageos.preference.SecureSettingSwitchPreference
+        android:key="key_combination_wakeup"
+        android:title="@string/key_combination_wakeup_title"
+        android:summary="@string/key_combination_wakeup_desc"
+        android:defaultValue="false" />
 
     <Preference
         android:key="gesture_double_twist_input_summary"
@@ -106,12 +141,6 @@
         android:title="@string/power_menu_setting_name"
         android:fragment="com.android.settings.gestures.PowerMenuSettings"
         settings:controller="com.android.settings.gestures.PowerMenuPreferenceController" />
-
-    <com.android.settingslib.PrimarySwitchPreference
-        android:key="gesture_prevent_ringing_summary"
-        android:title="@string/gesture_prevent_ringing_screen_title"
-        android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
-        settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
 
 	<Preference
         android:key="three_finger_gesture_summary"
