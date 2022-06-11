@@ -119,4 +119,8 @@
 
     <!-- Radio Info -->
     <string name="radio_info_title">Radio info</string>
+
+    <!-- Strict standby -->
+    <string name="laboratory_strict_standby_policy_title">Strict background process</string>
+    <string name="laboratory_strict_standby_policy_summary">When dismissing from recents, apps with restricted battery usage will be force stopped.</string>
 </resources>
