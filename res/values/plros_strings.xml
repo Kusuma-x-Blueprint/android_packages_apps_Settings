@@ -98,4 +98,7 @@
 
     <!-- Deep Sleep percentage in device info -->
     <string name="status_sleep_time">Deep sleep</string>
+
+    <!-- Battery optimization -->
+    <string name="high_power_apps_summary">Control battery usage for each apps</string>
 </resources>
