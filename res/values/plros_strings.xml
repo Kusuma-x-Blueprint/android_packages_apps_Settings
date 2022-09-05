@@ -56,4 +56,9 @@
     <!-- Force LTE_CA -->
     <string name="force_lte_ca">LTE carrier aggregation</string>
     <string name="force_lte_ca_summary">Increase data peak rate</string>
+
+    <!-- Per-app volume control -->
+    <string name="app_volume">Multi apps volume</string>
+    <string name="app_volume_title">@string/app_volume</string>
+    <string name="app_volume_summary">Allow to set different volume levels for each running app</string>
 </resources>
