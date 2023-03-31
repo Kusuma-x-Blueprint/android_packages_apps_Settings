@@ -49,4 +49,7 @@
 
     <!-- Volume link notification -->
     <string name="volume_link_notification_title">Tautkan volume dering &amp; notifikasi</string>
+
+    <!-- Force LTE_CA -->
+    <string name="force_lte_ca_summary">Meningkatkan kecepatan maksimal data</string>
 </resources>
