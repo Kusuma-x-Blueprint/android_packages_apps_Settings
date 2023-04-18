@@ -49,4 +49,7 @@
 
     <!-- Gesture navigation settings -->
     <string name="gesture_navigation_settings_activity_title">@string/edge_to_edge_navigation_title</string>
+
+    <!-- Volume link notification -->
+    <string name="volume_link_notification_title">Link ring &amp; notification volumes</string>
 </resources>
