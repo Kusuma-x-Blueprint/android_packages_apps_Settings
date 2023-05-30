@@ -171,4 +171,8 @@
     <!-- Pulse music visualizer -->
     <string name="show_lockscreen_pulse_title">Show Pulse</string>
     <string name="show_lockscreen_pulse_summary">Audio graphic equalizer on the lock screen</string>
+
+    <!-- Tiles on secure keyguard -->
+    <string name="use_tiles_on_secure_keyguard_title">Access Quick Settings from locked screen</string>
+    <string name="use_tiles_on_secure_keyguard_summary">Access sensitive Quick Settings tiles without unlocking your phone or tablet</string>
 </resources>
