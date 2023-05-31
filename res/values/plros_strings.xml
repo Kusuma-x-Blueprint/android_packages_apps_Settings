@@ -124,4 +124,9 @@
 
     <!-- Kusuma extra version -->
     <string name="kusuma_extra_version_title">Kusuma extra version</string>
+
+    <!-- Hide developer status -->
+    <string name="hide_developer_status_title">Exempt developer options</string>
+    <string name="search">Search</string>
+    <string name="search_apps">Search apps</string>
 </resources>
