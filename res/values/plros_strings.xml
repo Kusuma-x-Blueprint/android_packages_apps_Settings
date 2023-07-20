@@ -46,4 +46,7 @@
     <string name="custom_timeout_summary_30mins">30 minutes</string>
     <string name="custom_timeout_summary_1hour">1 hour</string>
     <string name="custom_timeout_summary_2hours">2 hours</string>
+
+    <!-- Gesture navigation settings -->
+    <string name="gesture_navigation_settings_activity_title">@string/edge_to_edge_navigation_title</string>
 </resources>
