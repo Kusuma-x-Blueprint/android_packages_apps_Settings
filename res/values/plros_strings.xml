@@ -96,6 +96,10 @@
     <string name="vol_up_down_action_title">Hold volume up and volume down key</string>
     <string name="vol_up_down_action_none">Accessibility shortcuts</string>
 
+    <!-- Button combination settings -->
+    <string name="button_combination_title">Button combinations</string>
+    <string name="button_combination_summary">Perform various button combinations for quick actions</string>
+
     <!-- Deep Sleep percentage in device info -->
     <string name="status_sleep_time">Deep sleep</string>
 
