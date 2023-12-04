@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Copyright (C) 2017 The Android Open Source Project
-  Copyright (C) 2017 Project Lineage Remix Open Source
+  Copyright (C) 2023 Project Lineage Remix Open Source
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -18,9 +18,15 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="button_combination_screen"
     android:title="@string/button_combination_title">
+
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="button_combination_video" 
+        settings:searchable="true"
+        app:lottie_rawRes="@raw/lottie_button_combination" />
 
     <lineageos.preference.SecureSettingListPreference
         android:key="power_double_tap_action"
