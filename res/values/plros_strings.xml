@@ -70,6 +70,7 @@
     <string name="custom_gesture_action_name_ringer_normal">Set ringer mode to normal</string>
     <string name="custom_gesture_action_name_ringer_vibrate">Set ringer mode to vibrate</string>
     <string name="custom_gesture_action_name_ringer_silent">Set ringer mode to silent</string>
+    <string name="custom_gesture_action_name_ringer_cycle">Cycle through ringer modes</string>
 
     <!-- Action values -->
     <string name="custom_gesture_action_value_none" translatable="false">none</string>
@@ -78,6 +79,7 @@
     <string name="custom_gesture_action_value_ringer_normal" translatable="false">ringermode:normal</string>
     <string name="custom_gesture_action_value_ringer_vibrate" translatable="false">ringermode:vibrate</string>
     <string name="custom_gesture_action_value_ringer_silent" translatable="false">ringermode:silent</string>
+    <string name="custom_gesture_action_value_ringer_cycle" translatable="false">ringermode:cycle</string>
 
     <!-- Power double tap action -->
     <string name="power_double_tap_action_title">Double press power button</string>
