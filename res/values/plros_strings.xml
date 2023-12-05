@@ -121,4 +121,7 @@
     <!-- Hardware info -->                                                                  
     <string name="platform_revision">Platform</string>                                      
     <string name="total_ram">Total RAM</string>
+
+    <!-- Kusuma extra version -->
+    <string name="kusuma_extra_version_title">Kusuma extra version</string>
 </resources>
