@@ -34,4 +34,7 @@
 
     <!-- Wheter to show device model -->
     <bool name="config_show_device_model">true</bool>
+
+    <!-- Whether to show screen off UDFPS-->
+    <bool name="config_show_screen_off_udfps">false</bool>
 </resources>

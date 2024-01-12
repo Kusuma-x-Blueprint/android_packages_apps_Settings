@@ -69,5 +69,11 @@ public class ScreenOffUdfpsSettings extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.screen_off_udfps_settings);
+            new BaseSearchIndexProvider(R.xml.screen_off_udfps_settings) {
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return context.getResources().getBoolean(R.bool.config_show_screen_off_udfps);
+                }
+            };
 }
