@@ -21,6 +21,9 @@
     android:title="@string/gesture_preference_title">
 
     <lineageos.preference.LineagePartsPreference
+        android:key="button_combination_settings" />
+
+    <lineageos.preference.LineagePartsPreference
         android:key="touchscreen_gesture_settings"
         settings:requiresFeature="lineagehardware:FEATURE_TOUCHSCREEN_GESTURES" />
 
@@ -45,12 +48,6 @@
         android:fragment="com.android.settings.gestures.SwipeToNotificationSettings"
         settings:searchable="false"
         settings:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController" />
-
-    <Preference
-        android:key="gesture_button_combination_input_summary"
-        android:title="@string/button_combination_title"
-        android:summary="@string/button_combination_summary"
-        android:fragment="com.android.settings.gestures.ButtonCombinationSettings" />
 
     <Preference
         android:key="gesture_double_twist_input_summary"
