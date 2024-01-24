@@ -101,6 +101,8 @@
     <!-- Button combination settings -->
     <string name="button_combination_title">Button combinations</string>
     <string name="button_combination_summary">Perform various button combinations for quick actions</string>
+    <string name="button_combination_summary_always_on">Always on</string>
+    <string name="button_combination_summary_only_screen_on">Only when screen is turned on</string>
 
     <!-- Deep Sleep percentage in device info -->
     <string name="status_sleep_time">Deep sleep</string>

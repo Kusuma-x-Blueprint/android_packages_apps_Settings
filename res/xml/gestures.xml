@@ -49,8 +49,8 @@
     <Preference
         android:key="gesture_button_combination_input_summary"
         android:title="@string/button_combination_title"
-        android:summary="@string/button_combination_summary"
-        android:fragment="com.android.settings.gestures.ButtonCombinationSettings" />
+        android:fragment="com.android.settings.gestures.ButtonCombinationSettings" 
+        settings:controller="com.android.settings.gestures.ButtonCombinationPreferenceController" />
 
     <Preference
         android:key="gesture_double_twist_input_summary"
