@@ -52,4 +52,64 @@
 
     <!-- Force LTE_CA -->
     <string name="force_lte_ca_summary">Meningkatkan kecepatan maksimal data</string>
+
+    <!-- Per-app volume control -->
+    <string name="app_volume">Volume multi aplikasi</string>
+    <string name="app_volume_summary">Menyetel tingkat volume berbeda-beda untuk setiap aplikasi yang berjalan</string>
+
+    <!-- Deep Sleep percentage in device info -->
+    <string name="status_sleep_time">Tidur lelap</string>
+
+    <!-- Battery optimization -->
+    <string name="high_power_apps_summary">Kontrol penggunaan baterai setiap aplikasi</string>
+
+    <!-- Battery Health -->
+    <string name="battery_health_title">Kesehatan baterai</string>
+    <string name="battery_health_summary">Pelajari lebih lanjut tentang sisa umur baterai</string>
+    <string name="battery_maximum_capacity_title">Kapasitas maksimum</string>
+    <string name="battery_health_footer">Baterai ponsel adalah komponen habis pakai yang dapat melemah semakin bertambahnya usia.\n\nKapasitas maksimum adalah ukuran kapasitas baterai dibandingkan saat masih baru. Kapasitas yang lebih rendah dapat mengakibatkan daya tahan yang berkurang seiring pengisian daya.\n\nSiklus pengisian daya adalah jumlah berapa kali daya baterai diisi. Menunjukkan berapa lama baterai telah digunakan.</string>
+    <string name="battery_charge_cycles_title">Siklus pengisian daya</string>
+    <string name="keywords_battery_health">baterai, kesehatan, pengisian daya, siklus, kapasitas</string>
+
+    <!-- Kusuma extra version -->
+    <string name="kusuma_extra_version_title">Versi extra Kusuma</string>
+
+    <!-- Hide developer status -->
+    <string name="hide_developer_status_title">Kecualikan opsi developer</string>
+    <string name="search">Telusuri</string>
+
+    <!-- Radio Info -->
+    <string name="radio_info_title">Informasi radio</string>
+
+    <!-- Strict standby -->
+    <string name="strict_standby_policy_title">Proses latar belakang ketat</string>
+    <string name="strict_standby_policy_summary">Saat ditutup dari pengalih aplikasi terbaru, aplikasi dengan penggunaan baterai terbatas akan dipaksa berhenti.</string>
+
+    <!-- Full screen apps -->
+    <string name="display_cutout_force_fullscreen_title">Aplikasi layar penuh</string>
+    <string name="display_cutout_force_fullscreen_summary">Mengabaikan potongan layar</string>
+
+    <!-- Pulse music visualizer -->
+    <string name="show_lockscreen_pulse_title">Tampilkan Pulse</string>
+    <string name="show_lockscreen_pulse_summary">Grafik ekualiser audio di layar kunci</string>
+
+    <!-- Tiles on secure keyguard -->
+    <string name="use_tiles_on_secure_keyguard_title">Akses Setelan Cepat dari perangkat yang dikunci</string>
+    <string name="use_tiles_on_secure_keyguard_summary">Mengakses Setelan Cepat rawan tanpa membuka kunci ponsel atau tablet</string>
+
+    <!-- Power menu on secure keyguard -->
+    <string name="use_power_menu_on_secure_keyguard_title">Akses menu daya dari perangkat yang dikunci</string>
+    <string name="use_power_menu_on_secure_keyguard_summary">Mengakses tindakan matikan dan mulai ulang tanpa membuka kunci ponsel atau tablet</string>
+
+    <!-- Ambient display gestures-->
+    <string name="double_tap_title">Gunakan gestur ketuk dua kali</string>
+    <string name="pick_up_gesture_title">Gunakan gestur angkat</string>
+    <string name="ambient_gesture_category">Gunakan gestur untuk</string>
+
+    <!-- Ambient wake toggles -->
+    <string name="doze_gesture_ambient_title">Tampilkan tampilan ambien</string>
+    <string name="doze_gesture_ambient_summary">Menimpa bangunkan perangkat dengan tampilan ambien</string>
+    <string name="gesture_wake_ambient">Tampilkan tampilan ambien</string>
+    <string name="gesture_wake">Bangunkan perangkat</string>
+    <string name="doze_double_tap_summary">Ketuk layar dua kali di mana saja untuk menampilkan tampilan ambien</string>
 </resources>
