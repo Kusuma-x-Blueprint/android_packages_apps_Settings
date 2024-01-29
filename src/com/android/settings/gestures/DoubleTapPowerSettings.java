@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
- * Copyright (C) 2023 Project Lineage Remix Open Source
+ * Copyright (C) 2016 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,30 +16,41 @@
 
 package com.android.settings.gestures;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.logging.MetricsLogger;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-@SearchIndexable
-public class ButtonCombinationSettings extends DashboardFragment {
+import java.util.Arrays;
+import java.util.List;
 
-     private static final String TAG = "ButtonCombinationSettings";
+@SearchIndexable
+public class DoubleTapPowerSettings extends DashboardFragment {
+
+    private static final String TAG = "DoubleTapPower";
+
+    public static final String PREF_KEY_SUGGESTION_COMPLETE =
+            "pref_double_tap_power_suggestion_complete";
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        SuggestionFeatureProvider suggestionFeatureProvider = FeatureFactory.getFactory(context)
+                .getSuggestionFeatureProvider(context);
+        SharedPreferences prefs = suggestionFeatureProvider.getSharedPrefs(context);
+        prefs.edit().putBoolean(PREF_KEY_SUGGESTION_COMPLETE, true).apply();
     }
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.BUTTON_COMBINATION;
+        return SettingsEnums.SETTINGS_GESTURE_DOUBLE_TAP_POWER;
     }
 
     @Override
@@ -50,9 +60,9 @@ public class ButtonCombinationSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.button_combination_settings;
+        return R.xml.double_tap_power_settings;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.button_combination_settings);
+            new BaseSearchIndexProvider(R.xml.double_tap_power_settings);
 }

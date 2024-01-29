@@ -47,10 +47,11 @@
         settings:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController" />
 
     <Preference
-        android:key="gesture_button_combination_input_summary"
-        android:title="@string/button_combination_title"
-        android:fragment="com.android.settings.gestures.ButtonCombinationSettings" 
-        settings:controller="com.android.settings.gestures.ButtonCombinationPreferenceController" />
+        android:key="gesture_double_tap_power_input_summary"
+        android:title="@string/double_tap_power_for_camera_title"
+        android:fragment="com.android.settings.gestures.DoubleTapPowerSettings"
+        settings:searchable="false"
+        settings:controller="com.android.settings.gestures.DoubleTapPowerPreferenceController" />
 
     <Preference
         android:key="gesture_double_twist_input_summary"
@@ -103,6 +104,12 @@
         android:title="@string/power_menu_setting_name"
         android:fragment="com.android.settings.gestures.PowerMenuSettings"
         settings:controller="com.android.settings.gestures.PowerMenuPreferenceController" />
+
+    <com.android.settingslib.PrimarySwitchPreference
+        android:key="gesture_prevent_ringing_summary"
+        android:title="@string/gesture_prevent_ringing_screen_title"
+        android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
+        settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
 
 	<Preference
         android:key="three_finger_gesture_summary"
