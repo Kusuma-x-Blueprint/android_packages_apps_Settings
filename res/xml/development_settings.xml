@@ -24,12 +24,6 @@
         android:order="100">
 
         <Preference
-            android:key="hide_developer_status_settings"
-            android:title="@string/hide_developer_status_title"
-            android:fragment="com.android.settings.development.HideDeveloperStatusSettings"
-            settings:controller="com.android.settings.development.HideDeveloperStatusPreferenceController" />
-
-        <Preference
             android:key="memory"
             android:title="@string/memory_settings_title"
             android:summary="@string/summary_placeholder"
@@ -97,6 +91,13 @@
             android:title="@string/runningservices_settings_title"
             android:summary="@string/runningservices_settings_summary"
             android:fragment="com.android.settings.applications.RunningServices" />
+
+        <Preference
+            android:key="hide_developer_status_settings"
+            android:title="@string/hide_developer_status_title"
+            android:summary="@string/hide_developer_status_summary"
+            android:fragment="com.android.settings.development.HideDeveloperStatusSettings"
+            settings:controller="com.android.settings.development.HideDeveloperStatusPreferenceController" />
 
         <com.android.settings.development.ColorModePreference
             android:key="picture_color_mode"

@@ -58,9 +58,9 @@
     <string name="force_lte_ca_summary">Increase data peak rate</string>
 
     <!-- Per-app volume control -->
-    <string name="app_volume">Multi apps volume</string>
+    <string name="app_volume">Apps volume</string>
     <string name="app_volume_title">@string/app_volume</string>
-    <string name="app_volume_summary">Allow to set different volume levels for each running app</string>
+    <string name="app_volume_summary">Set volume levels for each app</string>
 
     <!-- Deep Sleep percentage in device info -->
     <string name="status_sleep_time">Deep sleep</string>
@@ -79,14 +79,15 @@
     <string name="keywords_battery_health">battery, health, charge, cycles, capacity</string>
 
     <!-- Hardware info -->
-    <string name="soc_model">CPU</string>
+    <string name="soc_model">SoC</string>
     <string name="total_ram">RAM</string>
 
     <!-- Kusuma extra version -->
     <string name="kusuma_extra_version_title">Kusuma extra version</string>
 
     <!-- Hide developer status -->
-    <string name="hide_developer_status_title">Exempt developer options</string>
+    <string name="hide_developer_status_title">Shielded apps</string>
+    <string name="hide_developer_status_summary">Block apps to access developer options</string>
     <string name="search">Search</string>
     <string name="search_apps">@string/search</string>
 
@@ -126,7 +127,7 @@
 
     <!-- Full screen apps -->
     <string name="display_cutout_force_fullscreen_title">Full screen apps</string>
-    <string name="display_cutout_force_fullscreen_summary">Ignore device cutout</string>
+    <string name="display_cutout_force_fullscreen_summary">Allow apps to display beyond device cutout</string>
 
     <!-- Pulse music visualizer -->
     <string name="show_lockscreen_pulse_title">Show Pulse</string>

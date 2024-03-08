@@ -54,8 +54,8 @@
     <string name="force_lte_ca_summary">Meningkatkan kecepatan maksimal data</string>
 
     <!-- Per-app volume control -->
-    <string name="app_volume">Volume multi aplikasi</string>
-    <string name="app_volume_summary">Menyetel tingkat volume berbeda-beda untuk setiap aplikasi yang berjalan</string>
+    <string name="app_volume">Volume aplikasi</string>
+    <string name="app_volume_summary">Setel tingkat volume untuk setiap aplikasi</string>
 
     <!-- Deep Sleep percentage in device info -->
     <string name="status_sleep_time">Tidur lelap</string>
@@ -75,7 +75,8 @@
     <string name="kusuma_extra_version_title">Versi extra Kusuma</string>
 
     <!-- Hide developer status -->
-    <string name="hide_developer_status_title">Kecualikan opsi developer</string>
+    <string name="hide_developer_status_title">Perisai aplikasi</string>
+    <string name="hide_developer_status_summary">Blokir aplikasi untuk mengakses opsi pengembang</string>
     <string name="search">Telusuri</string>
 
     <!-- Radio Info -->
@@ -87,7 +88,7 @@
 
     <!-- Full screen apps -->
     <string name="display_cutout_force_fullscreen_title">Aplikasi layar penuh</string>
-    <string name="display_cutout_force_fullscreen_summary">Mengabaikan potongan layar</string>
+    <string name="display_cutout_force_fullscreen_summary">Izinkan aplikasi untuk ditampilkan melewati potongan layar</string>
 
     <!-- Pulse music visualizer -->
     <string name="show_lockscreen_pulse_title">Tampilkan Pulse</string>
