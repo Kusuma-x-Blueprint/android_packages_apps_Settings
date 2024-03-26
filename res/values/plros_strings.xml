@@ -81,6 +81,8 @@
 
     <!-- Kusuma extra version -->
     <string name="kusuma_extra_version_title">Kusuma extra version</string>
+    <string name="kusuma_number_title">Kusuma number</string>
+    <string name="kusuma_codename_title">Kusuma codename</string>
 
     <!-- Hide developer status -->
     <string name="hide_developer_status_title">Shielded apps</string>

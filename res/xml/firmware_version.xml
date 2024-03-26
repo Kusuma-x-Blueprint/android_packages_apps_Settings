@@ -40,7 +40,7 @@
 
     <!-- Kusuma extra version -->
     <Preference
-        android:key="kusuma_extra_version"
+        android:key="kusuma_extra_version_detail"
         android:title="@string/kusuma_extra_version_title"
         android:summary="@string/summary_placeholder"
         settings:enableCopying="true"

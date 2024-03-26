@@ -70,6 +70,8 @@
 
     <!-- Kusuma extra version -->
     <string name="kusuma_extra_version_title">Versi extra Kusuma</string>
+    <string name="kusuma_number_title">Nomor Kusuma</string>
+    <string name="kusuma_codename_title">Nama kode Kusuma</string>
 
     <!-- Hide developer status -->
     <string name="hide_developer_status_title">Perisai aplikasi</string>
