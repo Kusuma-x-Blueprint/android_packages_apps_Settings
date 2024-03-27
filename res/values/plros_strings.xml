@@ -50,9 +50,6 @@
     <!-- Gesture navigation settings -->
     <string name="gesture_navigation_settings_activity_title">@string/edge_to_edge_navigation_title</string>
 
-    <!-- Volume link notification -->
-    <string name="volume_link_notification_title">Link ring &amp; notification volumes</string>
-
     <!-- Force LTE_CA -->
     <string name="force_lte_ca">LTE carrier aggregation</string>
     <string name="force_lte_ca_summary">Increase data peak rate</string>

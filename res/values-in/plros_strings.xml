@@ -47,9 +47,6 @@
     <string name="custom_timeout_summary_1hour">1 jam</string>
     <string name="custom_timeout_summary_2hours">2 jam</string>
 
-    <!-- Volume link notification -->
-    <string name="volume_link_notification_title">Tautkan volume dering &amp; notifikasi</string>
-
     <!-- Force LTE_CA -->
     <string name="force_lte_ca_summary">Meningkatkan kecepatan maksimal data</string>
 
