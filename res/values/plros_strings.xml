@@ -86,7 +86,7 @@
 
     <!-- Hide developer status -->
     <string name="hide_developer_status_title">Shielded apps</string>
-    <string name="hide_developer_status_summary">Block apps to access developer options</string>
+    <string name="hide_developer_status_summary">Deny apps to access developer options</string>
     <string name="search">Search</string>
     <string name="search_apps">@string/search</string>
 
@@ -155,5 +155,5 @@
 
     <!-- Hide apps -->
     <string name="hide">Archive</string>
-    <string name="unhide">Unarchive</string>
+    <string name="unhide">Restore</string>
 </resources>

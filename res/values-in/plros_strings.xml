@@ -75,7 +75,7 @@
 
     <!-- Hide developer status -->
     <string name="hide_developer_status_title">Perisai aplikasi</string>
-    <string name="hide_developer_status_summary">Blokir aplikasi untuk mengakses opsi pengembang</string>
+    <string name="hide_developer_status_summary">Jangan izinkan aplikasi untuk mengakses opsi pengembang</string>
     <string name="search">Telusuri</string>
 
     <!-- Radio Info -->
@@ -112,4 +112,8 @@
     <string name="gesture_wake_ambient">Tampilkan tampilan ambien</string>
     <string name="gesture_wake">Bangunkan perangkat</string>
     <string name="doze_double_tap_summary">Ketuk layar dua kali di mana saja untuk menampilkan tampilan ambien</string>
+
+    <!-- Hide apps -->
+    <string name="hide">Arsipkan</string>
+    <string name="unhide">Pulihkan</string>
 </resources>
