@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -276,7 +277,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         return true;
     }
 
-    static void migrateOverlaySensitivityToSettings(Context context,
+    void migrateOverlaySensitivityToSettings(Context context,
             IOverlayManager overlayManager) {
         if (!SystemNavigationPreferenceController.isGestureNavigationEnabled(context)) {
             return;
@@ -316,12 +317,11 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         }
     }
 
-    @VisibleForTesting
-    static void setCurrentSystemNavigationMode(IOverlayManager overlayManager, String key) {
+    void setCurrentSystemNavigationMode(IOverlayManager overlayManager, String key) {
         String overlayPackage = NAV_BAR_MODE_GESTURAL_OVERLAY;
         switch (key) {
             case KEY_SYSTEM_NAV_GESTURAL:
-                overlayPackage = NAV_BAR_MODE_GESTURAL_OVERLAY;
+                overlayPackage = getNavBarGesturalOverlay();
                 break;
             case KEY_SYSTEM_NAV_2BUTTONS:
                 overlayPackage = NAV_BAR_MODE_2BUTTON_OVERLAY;
@@ -339,6 +339,22 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
+    }
+
+    private String getNavBarGesturalOverlay() {
+        boolean isHintEnabled = LineageSettings.System.getInt(getContext().getContentResolver(),
+                LineageSettings.System.NAVIGATION_BAR_HINT, 1) == 1;
+        boolean isHintKeyboardEnabled = Settings.System.getInt(getContext().getContentResolver(),
+                Settings.System.NAVIGATION_BAR_HINT_KEYBOARD, 1) == 1;
+        String overlay = NAV_BAR_MODE_GESTURAL_OVERLAY;
+        if (!isHintEnabled) {
+            overlay = "org.lineageos.overlay.customization.navbar.nohint";
+            if (!isHintKeyboardEnabled && getContext().getResources().getConfiguration().orientation == 
+                    Configuration.ORIENTATION_PORTRAIT) {
+                overlay = "com.kusumaos.overlay.customization.navbar.nokeyboardhint";
+            }
+        }
+        return overlay;
     }
 
     private static void setIllustrationVideo(IllustrationPreference videoPref,
