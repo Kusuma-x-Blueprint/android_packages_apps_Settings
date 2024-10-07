@@ -16,8 +16,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Three-fingers-swipe to screenshot -->
-    <string name="three_finger_gesture">Geser untuk screenshot</string>
-    <string name="three_finger_gesture_summary">Geser tiga jari ke bawah untuk screenshot</string>
+    <string name="three_finger_gesture">Screenshot tiga jari</string>
+    <string name="three_finger_gesture_summary">Geser tiga jari ke bawah untuk mengambil screenshot. Ketuk &amp; tahan tiga jari untuk mengambil screenshot sebagian.</string>
 
     <!-- Screenshot shutter -->
     <string name="screenshot_shutter_sound_title">Suara screenshot</string>
@@ -113,15 +113,17 @@
     <string name="category_name_status_bar_display">Bilah status</string>
     <string name="status_bar_system_icons_title">Ikon bilah status</string>
     <string name="status_bar_system_icons_summary">Kontrol setiap ikon bilah status yang ditampilkan</string>
+    <string name="keywords_status_bar_icons">putar, otomatis, headset, firewall, profil, kerja, transmisi, layar, hotspot, bluetooth, jangan, ganggu, bisukan, getar, wi-fi, panggilan, ethernet, data, seluler, volte, roaming, lalu, lintas, jaringan, vpn, penghemat, mode, pesawat, alarm, baterai, waktu, notifikasi</string>
 
     <!-- Quick pulldown -->
     <string name="status_bar_quick_qs_pulldown_title">Tarik ke bawah dengan cepat</string>
-    <string name="quick_pulldown_category_title">Akses Setelan Cepat dengan cepat dengan menggeser bilah status ke bawah dari</string>
+    <string name="quick_pulldown_main_switch_title">Gunakan tarik ke bawah dengan cepat</string>
+    <string name="quick_pulldown_category_title">Gunakan gestur dengan menarik bilah status ke bawah dari</string>
     <string name="quick_pulldown_hint_title">Menggeser bilah status ke bawah dengan dua jari akan selalu mengakses Setelan Cepat</string>
     <string name="status_bar_quick_qs_pulldown_summary">Tepi %1$s</string>
     <string name="status_bar_quick_qs_pulldown_summary_left">Kiri</string>
     <string name="status_bar_quick_qs_pulldown_summary_right">Kanan</string>
-    <string name="status_bar_quick_qs_pulldown_off">Tidak ada</string>
+    <string name="status_bar_quick_qs_pulldown_off">Nonaktif</string>
     <string name="status_bar_quick_qs_pulldown_left">Tepi kiri</string>
     <string name="status_bar_quick_qs_pulldown_right">Tepi kanan</string>
 
@@ -193,6 +195,13 @@
     <string name="hardware_keys_action_last_app">Aplikasi terakhir</string>
     <string name="hardware_keys_action_split_screen">Belah layar</string>
     <string name="hardware_keys_action_kill_app">Hentikan aplikasi saat ini</string>
+    <string name="hardware_keys_action_torch">Mengubah lampu senter</string>
+    <string name="hardware_keys_action_screenshot">Mengambil screenshot</string>
+    <string name="hardware_keys_action_volume_panel">Membuka panel volume</string>
+    <string name="hardware_keys_action_clear_all_notifications">Hapus semua notifikasi</string>
+    <string name="hardware_keys_action_notifications_panel">Membuka panel notifikasi</string>
+    <string name="hardware_keys_action_expand_qs_panel">Membuka panel Setelan Cepat</string>
+    <string name="hardware_keys_action_ringer_modes">Mengubah dering</string>
 
     <!-- Taskbar -->
     <string name="navigation_bar_enable_taskbar_title">Bilah tugas</string>
@@ -202,6 +211,7 @@
 
     <!-- Gesture navigation -->
     <string name="navigation_bar_edge_long_swipe_title">Aksi geser panjang tepi</string>
+    <string name="navigation_bar_corner_long_swipe_title">Aksi geser atas pojok bawah</string>
 
     <!-- Physical button navigation -->
     <string name="physical_button_navigation_title">Navigasi tombol fisik</string>
@@ -275,4 +285,25 @@
     <string name="storage_scopes_summary">Izinkan aplikasi untuk mengakses file dengan terbatas</string>
     <string name="contact_scopes">Kontak Terbatas</string>
     <string name="contact_scopes_summary">Izinkan aplikasi untuk mengakses kontak dengan terbatas</string>
+
+    <!-- Encryption -->
+    <string name="encrypted_summary_not_supported">Tidak didukung</string>
+
+    <!-- Power double tap action -->
+    <string name="power_double_tap_action_title">Tombol daya cepat</string>
+    <string name="double_tap_power_category_title">Tekan tombol daya dua kali untuk</string>
+    <string name="double_tap_power_main_switch_title">Gunakan tombol daya cepat</string>
+    <string name="custom_gesture_action_name_none">Nonaktif</string>
+    <string name="custom_gesture_action_name_camera">Membuka kamera</string>
+    <string name="custom_gesture_action_name_assistant">Akses asisten digital Anda</string>
+    <string name="custom_gesture_action_name_toggle_media">Putar atau jeda media</string>
+    <string name="custom_gesture_action_name_qr">Membuka pemindai kode QR</string>
+    <string name="custom_gesture_action_name_wallet">Akses Wallet digital Anda</string>
+    <string name="custom_gesture_action_name_wallet_disabled">Wallet tidak tersedia</string>
+    <string name="custom_gesture_action_name_device_control">Membuka kontrol perangkat</string>
+    <string name="custom_gesture_action_name_device_control_disabled">Perangkat tidak tersedia</string>
+    <string name="custom_gesture_action_name_app">Membuka aplikasi</string>
+    <string name="custom_gesture_action_name_app_summary">Tidak ada</string>
+    <string name="custom_gesture_action_name_app_open">Membuka</string>
+    <string name="custom_gesture_action_name_app_unavailable">Aplikasi tidak disetel</string>
 </resources>
