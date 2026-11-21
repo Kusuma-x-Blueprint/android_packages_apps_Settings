@@ -20,6 +20,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.UserHandle
 import android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON
 import android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL
 import com.android.internal.R as InternalR
@@ -34,6 +35,8 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import lineageos.hardware.LineageHardwareManager
+import lineageos.providers.LineageSettings
 
 // LINT.IfChange
 @ProvidePreferenceScreen(SystemNavigationGestureScreen.KEY)
@@ -70,6 +73,8 @@ class SystemNavigationGestureScreen :
 
     override fun getSummary(context: Context): CharSequence? =
         when {
+            context.isHardwareKeysEnabled() ->
+                context.getText(R.string.physical_button_navigation_title)
             context.isGestureNavigationEnabled() ->
                 context.getText(R.string.edge_to_edge_navigation_title)
             context.is2ButtonNavigationEnabled() ->
@@ -93,6 +98,14 @@ class SystemNavigationGestureScreen :
         val quickStepIntent = Intent(ACTION_QUICKSTEP).setPackage(recentsComponentName.packageName)
         return packageManager.resolveService(quickStepIntent, PackageManager.MATCH_SYSTEM_ONLY) !=
             null
+    }
+
+    fun Context.isHardwareKeysEnabled(): Boolean {
+        val hardware = LineageHardwareManager.getInstance(this)
+        return hardware.isSupported(LineageHardwareManager.FEATURE_KEY_DISABLE) &&
+            LineageSettings.System.getIntForUser(
+                contentResolver, LineageSettings.System.FORCE_SHOW_NAVBAR, 0, UserHandle.USER_CURRENT
+            ) == 0
     }
 
     fun Context.isGestureNavigationEnabled(): Boolean =

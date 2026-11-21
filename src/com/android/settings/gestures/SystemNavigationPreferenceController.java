@@ -24,12 +24,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.RemoteException;
+import android.os.UserHandle;
 import android.view.Display;
 import android.view.IWindowManager;
 import android.view.WindowManagerGlobal;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+
+import lineageos.hardware.LineageHardwareManager;
+import lineageos.providers.LineageSettings;
 
 // LINT.IfChange
 public class SystemNavigationPreferenceController extends BasePreferenceController {
@@ -48,7 +52,9 @@ public class SystemNavigationPreferenceController extends BasePreferenceControll
 
     @Override
     public CharSequence getSummary() {
-        if (isGestureNavigationEnabled(mContext)) {
+        if (isHardwareKeysEnabled(mContext)) {
+            return mContext.getText(R.string.physical_button_navigation_title);
+        } else if (isGestureNavigationEnabled(mContext)) {
             return mContext.getText(R.string.edge_to_edge_navigation_title);
         } else if (is2ButtonNavigationEnabled(mContext)) {
             return mContext.getText(R.string.swipe_up_to_switch_apps_title);
@@ -71,8 +77,8 @@ public class SystemNavigationPreferenceController extends BasePreferenceControll
         }
 
         // Skip if the swipe up settings are not available
-        // or if on-screen navbar is disabled (for devices with hardware keys)
-        if (!configEnabled || !hasNavigationBar) {
+        // or if on-screen navbar is disabled and device has no hardware keys disabler
+        if (!configEnabled || (!hasNavigationBar && !isKeyDisablerSupported(context))) {
             return false;
         }
 
@@ -111,6 +117,17 @@ public class SystemNavigationPreferenceController extends BasePreferenceControll
     static boolean isGestureNavigationEnabled(Context context) {
         return NAV_BAR_MODE_GESTURAL == context.getResources().getInteger(
                 com.android.internal.R.integer.config_navBarInteractionMode);
+    }
+
+    static boolean isKeyDisablerSupported(Context context) {
+        return LineageHardwareManager.getInstance(context)
+                .isSupported(LineageHardwareManager.FEATURE_KEY_DISABLE);
+    }
+
+    static boolean isHardwareKeysEnabled(Context context) {
+        return isKeyDisablerSupported(context)
+                && LineageSettings.System.getIntForUser(context.getContentResolver(),
+                        LineageSettings.System.FORCE_SHOW_NAVBAR, 0, UserHandle.USER_CURRENT) == 0;
     }
 }
 // LINT.ThenChange(SystemNavigationGestureScreen.kt)

@@ -31,6 +31,7 @@ import android.content.om.OverlayInfo;
 import android.content.res.Resources;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
@@ -54,6 +55,9 @@ import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
+import lineageos.hardware.LineageHardwareManager;
+import lineageos.providers.LineageSettings;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +66,8 @@ import java.util.List;
 public class SystemNavigationGestureSettings extends RadioButtonPickerFragment implements
         HelpResourceProvider {
 
+    @VisibleForTesting
+    static final String KEY_SYSTEM_NAV_PHYSICAL_BUTTONS = "system_nav_physicalbuttons";
     @VisibleForTesting
     static final String KEY_SYSTEM_NAV_3BUTTONS = "system_nav_3buttons";
     @VisibleForTesting
@@ -150,6 +156,14 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
                     .setPackage(getContext().getPackageName())));
         }
 
+        if (KEY_SYSTEM_NAV_PHYSICAL_BUTTONS.equals(info.getKey())) {
+            pref.setExtraWidgetOnClickListener((v) ->
+                    new SubSettingLauncher(getContext())
+                            .setDestination(PhysicalButtonNavigationSettingsFragment.class.getName())
+                            .setSourceMetricsCategory(SettingsEnums.SETTINGS_GESTURE_SWIPE_UP)
+                            .launch());
+        }
+
         // With flag enabled, the button order preference will always be available
         boolean navbarAvailable = android.view.accessibility.Flags.navbarFlipOrderOption()
                 || !PreferenceControllerListHelper.areAllPreferencesUnavailable(
@@ -198,6 +212,12 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
                     c.getText(R.string.legacy_navigation_summary),
                     KEY_SYSTEM_NAV_3BUTTONS, true /* enabled */));
         }
+        if (SystemNavigationPreferenceController.isKeyDisablerSupported(c)) {
+            candidates.add(new CandidateInfoExtra(
+                    c.getText(R.string.physical_button_navigation_title),
+                    c.getText(R.string.physical_button_navigation_summary),
+                    KEY_SYSTEM_NAV_PHYSICAL_BUTTONS, true /* enabled */));
+        }
 
         return candidates;
     }
@@ -209,7 +229,22 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
 
     @Override
     protected boolean setDefaultKey(String key) {
-        setCurrentSystemNavigationMode(mOverlayManager, key);
+        final Context context = getContext();
+        if (KEY_SYSTEM_NAV_PHYSICAL_BUTTONS.equals(key)) {
+            setCurrentSystemNavigationMode(mOverlayManager, KEY_SYSTEM_NAV_3BUTTONS);
+            LineageSettings.System.putIntForUser(context.getContentResolver(),
+                    LineageSettings.System.FORCE_SHOW_NAVBAR, 0, UserHandle.USER_CURRENT);
+            LineageHardwareManager.getInstance(context).set(
+                    LineageHardwareManager.FEATURE_KEY_DISABLE, false);
+        } else {
+            if (SystemNavigationPreferenceController.isKeyDisablerSupported(context)) {
+                LineageSettings.System.putIntForUser(context.getContentResolver(),
+                        LineageSettings.System.FORCE_SHOW_NAVBAR, 1, UserHandle.USER_CURRENT);
+                LineageHardwareManager.getInstance(context).set(
+                        LineageHardwareManager.FEATURE_KEY_DISABLE, true);
+            }
+            setCurrentSystemNavigationMode(mOverlayManager, key);
+        }
         setIllustrationVideo(mVideoPreference, key);
         return true;
     }
@@ -242,7 +277,9 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
 
     @VisibleForTesting
     static String getCurrentSystemNavigationMode(Context context) {
-        if (SystemNavigationPreferenceController.isGestureNavigationEnabled(context)) {
+        if (SystemNavigationPreferenceController.isHardwareKeysEnabled(context)) {
+            return KEY_SYSTEM_NAV_PHYSICAL_BUTTONS;
+        } else if (SystemNavigationPreferenceController.isGestureNavigationEnabled(context)) {
             return KEY_SYSTEM_NAV_GESTURAL;
         } else if (SystemNavigationPreferenceController.is2ButtonNavigationEnabled(context)) {
             return KEY_SYSTEM_NAV_2BUTTONS;
@@ -282,6 +319,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
             case KEY_SYSTEM_NAV_2BUTTONS:
                 videoPref.setLottieAnimationResId(R.raw.lottie_system_nav_2_button);
                 break;
+            case KEY_SYSTEM_NAV_PHYSICAL_BUTTONS:
             case KEY_SYSTEM_NAV_3BUTTONS:
                 videoPref.setLottieAnimationResId(R.raw.lottie_system_nav_3_button);
                 break;
@@ -324,6 +362,14 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
                         data.title = res.getString(R.string.legacy_navigation_title);
                         data.key = KEY_SYSTEM_NAV_3BUTTONS;
                         data.keywords = res.getString(R.string.keywords_3_button_navigation);
+                        result.add(data);
+                    }
+
+                    if (SystemNavigationPreferenceController.isKeyDisablerSupported(context)) {
+                        SearchIndexableRaw data = new SearchIndexableRaw(context);
+                        data.title = res.getString(R.string.physical_button_navigation_title);
+                        data.key = KEY_SYSTEM_NAV_PHYSICAL_BUTTONS;
+                        data.keywords = res.getString(R.string.keywords_physical_button_navigation);
                         result.add(data);
                     }
 

@@ -120,6 +120,7 @@ import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 import com.android.settings.fuelgauge.batteryusage.PowerUsageAdvanced;
 import com.android.settings.fuelgauge.batteryusage.PowerUsageSummary;
 import com.android.settings.gestures.ButtonNavigationSettingsFragment;
+import com.android.settings.gestures.PhysicalButtonNavigationSettingsFragment;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
 import com.android.settings.gestures.DoubleTwistGestureSettings;
@@ -387,6 +388,7 @@ public class SettingsGateway {
             BugReportHandlerPicker.class.getName(),
             GestureNavigationSettingsFragment.class.getName(),
             ButtonNavigationSettingsFragment.class.getName(),
+            PhysicalButtonNavigationSettingsFragment.class.getName(),
             InteractAcrossProfilesSettings.class.getName(),
             InteractAcrossProfilesDetails.class.getName(),
             MediaControlsSettings.class.getName(),
