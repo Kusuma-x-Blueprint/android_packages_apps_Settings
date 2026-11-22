@@ -75,8 +75,7 @@ public class ButtonNavigationSettingsFragmentTest {
 
     @Test
     public void getPreferenceScreenBindingKey_returnsCorrectKey() {
-        assertThat(mFragment.getPreferenceScreenBindingKey(mContext)).isEqualTo(
-                ButtonNavigationSettingsScreen.KEY);
+        assertThat(mFragment.getPreferenceScreenBindingKey(mContext)).isNull();
     }
 
     private static void addPackageToPackageManager(Context context, String pkg) {

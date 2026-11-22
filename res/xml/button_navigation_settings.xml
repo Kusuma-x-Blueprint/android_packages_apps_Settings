@@ -38,6 +38,12 @@
         settings:controller="com.android.settings.gestures.ButtonNavigationSettingsAssistController"
     />
 
+    <PreferenceCategory
+        android:key="button_navigation_settings_order_category"
+        android:title="@string/button_navigation_settings_order_title"
+        settings:controller="com.android.settings.gestures.ButtonNavigationSettingsOrderPreferenceController"
+    />
+
     <SwitchPreferenceCompat
         android:key="enable_taskbar"
         android:title="@string/navigation_bar_enable_taskbar_title"

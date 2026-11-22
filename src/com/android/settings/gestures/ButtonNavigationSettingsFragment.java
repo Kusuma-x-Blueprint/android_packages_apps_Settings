@@ -183,7 +183,7 @@ public class ButtonNavigationSettingsFragment extends DashboardFragment implemen
     @Override
     @Nullable
     public String getPreferenceScreenBindingKey(@NonNull Context context) {
-        return ButtonNavigationSettingsScreen.KEY;
+        return null;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
