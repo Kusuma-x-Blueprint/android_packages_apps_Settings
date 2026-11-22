@@ -157,6 +157,11 @@ public class TorchLongPressPowerParentPreferenceController extends TogglePrefere
         }
     }
 
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_system;
+    }
+
     private class SettingObserver extends ContentObserver {
         private final Uri TORCH_GESTURE_URI = LineageSettings.System.getUriFor(
                 LineageSettings.System.TORCH_LONG_PRESS_POWER_GESTURE);
