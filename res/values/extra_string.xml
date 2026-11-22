@@ -82,4 +82,10 @@
     <string name="menu_wake_title">Menu button wake</string>
     <string name="assist_wake_title">Search button wake</string>
     <string name="app_switch_wake_title">Recents button wake</string>
+
+    <!-- Call answer controls -->
+    <string name="volume_answer_call_title">Volume buttons answer call</string>
+    <string name="volume_answer_call_summary">Answer incoming calls by pressing the volume buttons</string>
+    <string name="home_answer_call_title">Home button answers call</string>
+    <string name="home_answer_call_summary">Answer incoming calls by pressing the home button</string>
 </resources>

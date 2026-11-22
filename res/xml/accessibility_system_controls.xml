@@ -43,6 +43,20 @@
         settings:controller="com.android.settings.gestures.OneHandedEnablePreferenceController"/>
 
     <SwitchPreferenceCompat
+        android:key="volume_answer_call"
+        android:persistent="false"
+        android:title="@string/volume_answer_call_title"
+        android:summary="@string/volume_answer_call_summary"
+        settings:controller="com.android.settings.accessibility.VolumeButtonAnswersCallPreferenceController"/>
+
+    <SwitchPreferenceCompat
+        android:key="home_answer_call"
+        android:persistent="false"
+        android:title="@string/home_answer_call_title"
+        android:summary="@string/home_answer_call_summary"
+        settings:controller="com.android.settings.accessibility.HomeButtonAnswersCallPreferenceController"/>
+
+    <SwitchPreferenceCompat
         android:key="toggle_power_button_ends_call_preference"
         android:persistent="false"
         android:title="@string/accessibility_power_button_ends_call_prerefence_title"
