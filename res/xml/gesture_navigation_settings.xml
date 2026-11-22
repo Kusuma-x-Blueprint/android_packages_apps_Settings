@@ -34,11 +34,24 @@
             settings:buttonPreferenceType="filled" />
     </PreferenceCategory>
 
+    <SwitchPreferenceCompat
+        android:key="enable_taskbar"
+        android:title="@string/navigation_bar_enable_taskbar_title"
+        settings:controller="com.android.settings.gestures.TaskbarPreferenceController" />
+
     <lineageos.preference.LineageSystemSettingSwitchPreference
         android:key="navigation_bar_hint"
         android:title="@string/show_navbar_hint_title"
         android:summary="@string/show_navbar_hint_summary"
         android:defaultValue="true" />
+
+    <ListPreference
+        android:key="navigation_bar_edge_long_swipe"
+        android:dialogTitle="@string/navigation_bar_edge_long_swipe_title"
+        android:title="@string/navigation_bar_edge_long_swipe_title"
+        android:entries="@array/hardware_keys_action_entries"
+        android:entryValues="@array/hardware_keys_action_values"
+        android:persistent="false" />
 
     <PreferenceCategory
         android:key="assistant_gesture_category"

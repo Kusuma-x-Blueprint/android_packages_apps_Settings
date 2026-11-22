@@ -33,14 +33,24 @@ import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.ButtonPreference;
 import com.android.settingslib.widget.SliderPreference;
 
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+
+import lineageos.providers.LineageSettings;
+import org.lineageos.internal.util.DeviceKeysConstants.Action;
+
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 /**
  * A fragment to include all the settings related to Gesture Navigation mode.
  */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class GestureNavigationSettingsFragment extends DashboardFragment {
+public class GestureNavigationSettingsFragment extends DashboardFragment implements
+        Preference.OnPreferenceChangeListener {
 
     public static final String TAG = "GestureNavigationSettingsFragment";
 
@@ -51,12 +61,14 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
     private static final String LEFT_EDGE_SEEKBAR_KEY = "gesture_left_back_sensitivity";
     private static final String RIGHT_EDGE_SEEKBAR_KEY = "gesture_right_back_sensitivity";
     private static final String GESTURE_TUTORIAL_KEY = "assistant_gesture_navigation_tutorial";
+    private static final String KEY_EDGE_LONG_SWIPE = "navigation_bar_edge_long_swipe";
     final Intent mLaunchTutorialIntent =  new Intent(ACTION_GESTURE_SANDBOX)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             .putExtra("use_tutorial_menu", true);
 
     private WindowManager mWindowManager;
     private BackGestureIndicatorView mIndicatorView;
+    private ListPreference mEdgeLongSwipeAction;
 
     private float[] mBackGestureInsetScales;
     private float mDefaultBackGestureInset;
@@ -86,6 +98,29 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
         initSliderPreference(LEFT_EDGE_SEEKBAR_KEY);
         initSliderPreference(RIGHT_EDGE_SEEKBAR_KEY);
         initTutorialButton();
+
+        List<Integer> unsupportedValues = new ArrayList<>();
+        List<String> entries = new ArrayList<>(
+                Arrays.asList(res.getStringArray(R.array.hardware_keys_action_entries)));
+        List<String> values = new ArrayList<>(
+                Arrays.asList(res.getStringArray(R.array.hardware_keys_action_values)));
+
+        unsupportedValues.add(Action.SPLIT_SCREEN.ordinal());
+
+        for (int unsupportedValue : unsupportedValues) {
+            entries.remove(unsupportedValue);
+            values.remove(unsupportedValue);
+        }
+
+        String[] actionEntries = entries.toArray(new String[0]);
+        String[] actionValues = values.toArray(new String[0]);
+
+        Action edgeLongSwipeAction = Action.fromSettings(
+                requireActivity().getContentResolver(),
+                LineageSettings.System.KEY_EDGE_LONG_SWIPE_ACTION,
+                Action.NOTHING);
+        mEdgeLongSwipeAction = initList(KEY_EDGE_LONG_SWIPE,
+                edgeLongSwipeAction, actionEntries, actionValues);
     }
 
     @Override
@@ -136,6 +171,34 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
         pref.setOnClickListener(preference -> {
             startActivity(mLaunchTutorialIntent);
         });
+    }
+
+    private ListPreference initList(String key, Action value, String[] entries, String[] values) {
+        return initList(key, value.ordinal(), entries, values);
+    }
+
+    private ListPreference initList(String key, int value, String[] entries, String[] values) {
+        ListPreference list = findPreference(key);
+        if (list == null) return null;
+        list.setEntries(entries);
+        list.setEntryValues(values);
+        list.setValue(Integer.toString(value));
+        list.setSummary(list.getEntry());
+        list.setOnPreferenceChangeListener(this);
+        return list;
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mEdgeLongSwipeAction) {
+            String value = (String) newValue;
+            int index = mEdgeLongSwipeAction.findIndexOfValue(value);
+            mEdgeLongSwipeAction.setSummary(mEdgeLongSwipeAction.getEntries()[index]);
+            LineageSettings.System.putInt(requireActivity().getContentResolver(),
+                    LineageSettings.System.KEY_EDGE_LONG_SWIPE_ACTION, Integer.parseInt(value));
+            return true;
+        }
+        return false;
     }
 
     private boolean isGestureTutorialAvailable() {
