@@ -99,6 +99,27 @@
             settings:controller="com.android.settings.notification.AlarmVolumePreferenceController"/>
     </com.android.settingslib.widget.UntitledPreferenceCategory>
 
+    <!-- Volume buttons category -->
+    <com.android.settingslib.widget.UntitledPreferenceCategory
+        android:key="volume_buttons_category"
+        android:order="-155"
+        settings:controller="com.android.settings.sound.VolumeButtonsCategoryPreferenceController">
+        <SwitchPreferenceCompat
+            android:key="swap_volume_buttons"
+            android:title="@string/swap_volume_buttons_title"
+            android:summary="@string/swap_volume_buttons_summary"
+            android:order="-100"
+            settings:controller="com.android.settings.sound.SwapVolumeButtonsPreferenceController"/>
+
+        <ListPreference
+            android:key="volume_panel_on_left"
+            android:title="@string/volume_panel_position_title"
+            android:entries="@array/volume_panel_position_entries"
+            android:entryValues="@array/volume_panel_position_values"
+            android:order="-90"
+            settings:controller="com.android.settings.sound.VolumePanelPositionPreferenceController"/>
+    </com.android.settingslib.widget.UntitledPreferenceCategory>
+
     <!-- Vibrations and haptics category -->
     <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="vibration_category"

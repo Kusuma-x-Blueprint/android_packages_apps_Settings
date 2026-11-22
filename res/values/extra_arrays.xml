@@ -48,4 +48,15 @@
         <item>12</item>
         <item>13</item>
     </string-array>
+
+    <!-- Volume panel position entries and values -->
+    <string-array name="volume_panel_position_entries" translatable="false">
+        <item>@string/volume_panel_position_left</item>
+        <item>@string/volume_panel_position_right</item>
+    </string-array>
+
+    <string-array name="volume_panel_position_values" translatable="false">
+        <item>1</item>
+        <item>0</item>
+    </string-array>
 </resources>

@@ -88,4 +88,11 @@
     <string name="volume_answer_call_summary">Answer incoming calls by pressing the volume buttons</string>
     <string name="home_answer_call_title">Home button answers call</string>
     <string name="home_answer_call_summary">Answer incoming calls by pressing the home button</string>
+
+    <!-- Volume buttons settings -->
+    <string name="swap_volume_buttons_title">Reorient</string>
+    <string name="swap_volume_buttons_summary">Swap volume buttons when the screen is rotated</string>
+    <string name="volume_panel_position_title">Volume panel position</string>
+    <string name="volume_panel_position_left">Left</string>
+    <string name="volume_panel_position_right">Right</string>
 </resources>
