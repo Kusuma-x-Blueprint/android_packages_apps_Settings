@@ -98,4 +98,10 @@
         android:title="@string/volbtn_music_controls_title"
         android:fragment="com.android.settings.gestures.VolumeButtonMusicControlsGestureSettings"
         settings:controller="com.android.settings.gestures.VolumeButtonMusicControlsPreferenceController" />
+
+    <Preference
+        android:key="gesture_click_partial_screenshot_summary"
+        android:title="@string/click_partial_screenshot_title"
+        android:fragment="com.android.settings.gestures.ClickPartialScreenshotGestureSettings"
+        settings:controller="com.android.settings.gestures.ClickPartialScreenshotPreferenceController" />
 </PreferenceScreen>
