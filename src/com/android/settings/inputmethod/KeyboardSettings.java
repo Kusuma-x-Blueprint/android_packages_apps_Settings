@@ -121,6 +121,10 @@ public class KeyboardSettings extends DashboardFragment {
                     if (!hardware.isSupported(LineageHardwareManager.FEATURE_TOUCH_HOVERING)) {
                         keys.add(KEY_TOUCH_HOVERING);
                     }
+                    if (!VolumeKeyCursorControlPreferenceController
+                            .isVolumeKeyCursorControlAvailable(context)) {
+                        keys.add("volume_key_cursor_control");
+                    }
                     return keys;
                 }
             };

@@ -52,6 +52,14 @@
             android:summary="@string/user_dict_settings_summary"
             android:fragment="com.android.settings.inputmethod.UserDictionaryList"
             settings:controller="com.android.settings.language.UserDictionaryPreferenceController" />
+
+        <ListPreference
+            android:key="volume_key_cursor_control"
+            android:title="@string/volbtn_cursor_control_title"
+            android:dialogTitle="@string/volbtn_cursor_control_title"
+            android:entries="@array/volbtn_cursor_control_entries"
+            android:entryValues="@array/volbtn_cursor_control_values"
+            settings:controller="com.android.settings.inputmethod.VolumeKeyCursorControlPreferenceController" />
     </PreferenceCategory>
 
     <lineageos.preference.LineageSecureSettingSwitchPreference
