@@ -253,6 +253,49 @@
             android:defaultValue="@*lineageos.platform:bool/config_proximityCheckOnWakeEnabledByDefault"
             settings:requiresConfig="@*lineageos.platform:bool/config_proximityCheckOnWake" />
 
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="volume_wake_screen"
+            android:title="@string/volume_wake_title"
+            android:summary="@string/volume_wake_summary"
+            android:defaultValue="false"
+            settings:requiresConfig="@*lineageos.platform:integer/config_deviceHardwareWakeKeys"
+            settings:requiresConfigMask="64" />
+
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="home_wake_screen"
+            android:title="@string/home_wake_title"
+            android:defaultValue="true"
+            settings:requiresConfig="@*lineageos.platform:integer/config_deviceHardwareWakeKeys"
+            settings:requiresConfigMask="1" />
+
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="back_wake_screen"
+            android:title="@string/back_wake_title"
+            android:defaultValue="false"
+            settings:requiresConfig="@*lineageos.platform:integer/config_deviceHardwareWakeKeys"
+            settings:requiresConfigMask="2" />
+
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="menu_wake_screen"
+            android:title="@string/menu_wake_title"
+            android:defaultValue="false"
+            settings:requiresConfig="@*lineageos.platform:integer/config_deviceHardwareWakeKeys"
+            settings:requiresConfigMask="4" />
+
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="assist_wake_screen"
+            android:title="@string/assist_wake_title"
+            android:defaultValue="false"
+            settings:requiresConfig="@*lineageos.platform:integer/config_deviceHardwareWakeKeys"
+            settings:requiresConfigMask="8" />
+
+        <lineageos.preference.LineageSystemSettingSwitchPreference
+            android:key="app_switch_wake_screen"
+            android:title="@string/app_switch_wake_title"
+            android:defaultValue="false"
+            settings:requiresConfig="@*lineageos.platform:integer/config_deviceHardwareWakeKeys"
+            settings:requiresConfigMask="16" />
+
         <!-- Double tap to sleep -->
         <lineageos.preference.LineageSystemSettingSwitchPreference
             android:key="double_tap_sleep_gesture"
@@ -267,6 +310,9 @@
             android:summary="@string/wake_when_plugged_or_unplugged_summary"
             android:defaultValue="@*android:bool/config_unplugTurnsOnScreen"
             settings:requiresConfig="@bool/config_show_top_level_battery" />
+
+        <lineageos.preference.LineagePartsPreference
+            android:key="power_menu" />
 
         <lineageos.preference.LineageSystemSettingSwitchPreference
             android:key="high_touch_polling_rate_enable"

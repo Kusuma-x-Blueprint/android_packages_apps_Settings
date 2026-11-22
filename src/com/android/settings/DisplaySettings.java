@@ -38,6 +38,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import lineageos.hardware.LineageHardwareManager;
+import org.lineageos.internal.util.DeviceKeysConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,12 @@ public class DisplaySettings extends DashboardFragment {
     private static final String KEY_HIGH_TOUCH_POLLING_RATE = "high_touch_polling_rate_enable";
     private static final String KEY_HIGH_TOUCH_SENSITIVITY = "high_touch_sensitivity_enable";
     private static final String KEY_PROXIMITY_ON_WAKE = "proximity_on_wake";
+    private static final String KEY_HOME_WAKE_SCREEN = "home_wake_screen";
+    private static final String KEY_BACK_WAKE_SCREEN = "back_wake_screen";
+    private static final String KEY_MENU_WAKE_SCREEN = "menu_wake_screen";
+    private static final String KEY_ASSIST_WAKE_SCREEN = "assist_wake_screen";
+    private static final String KEY_APP_SWITCH_WAKE_SCREEN = "app_switch_wake_screen";
+    private static final String KEY_VOLUME_WAKE_SCREEN = "volume_wake_screen";
 
     @Override
     public int getMetricsCategory() {
@@ -68,6 +75,30 @@ public class DisplaySettings extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        final int deviceKeys = getResources().getInteger(
+                org.lineageos.platform.internal.R.integer.config_deviceHardwareKeys);
+        final int deviceWakeKeys = getResources().getInteger(
+                org.lineageos.platform.internal.R.integer.config_deviceHardwareWakeKeys);
+
+        if ((deviceKeys & deviceWakeKeys & DeviceKeysConstants.KEY_MASK_HOME) == 0) {
+            removePreference(KEY_HOME_WAKE_SCREEN);
+        }
+        if ((deviceKeys & deviceWakeKeys & DeviceKeysConstants.KEY_MASK_BACK) == 0) {
+            removePreference(KEY_BACK_WAKE_SCREEN);
+        }
+        if ((deviceKeys & deviceWakeKeys & DeviceKeysConstants.KEY_MASK_MENU) == 0) {
+            removePreference(KEY_MENU_WAKE_SCREEN);
+        }
+        if ((deviceKeys & deviceWakeKeys & DeviceKeysConstants.KEY_MASK_ASSIST) == 0) {
+            removePreference(KEY_ASSIST_WAKE_SCREEN);
+        }
+        if ((deviceKeys & deviceWakeKeys & DeviceKeysConstants.KEY_MASK_APP_SWITCH) == 0) {
+            removePreference(KEY_APP_SWITCH_WAKE_SCREEN);
+        }
+        if ((deviceKeys & deviceWakeKeys & DeviceKeysConstants.KEY_MASK_VOLUME) == 0) {
+            removePreference(KEY_VOLUME_WAKE_SCREEN);
+        }
     }
 
     @Override
@@ -112,6 +143,31 @@ public class DisplaySettings extends DashboardFragment {
                             org.lineageos.platform.internal.R.bool.config_proximityCheckOnWake)) {
                         keys.add(KEY_PROXIMITY_ON_WAKE);
                     }
+
+                    final int deviceKeys = context.getResources().getInteger(
+                            org.lineageos.platform.internal.R.integer.config_deviceHardwareKeys);
+                    final int deviceWakeKeys = context.getResources().getInteger(
+                            org.lineageos.platform.internal.R.integer.config_deviceHardwareWakeKeys);
+
+                    if ((deviceKeys & deviceWakeKeys & DeviceKeysConstants.KEY_MASK_HOME) == 0) {
+                        keys.add(KEY_HOME_WAKE_SCREEN);
+                    }
+                    if ((deviceKeys & deviceWakeKeys & DeviceKeysConstants.KEY_MASK_BACK) == 0) {
+                        keys.add(KEY_BACK_WAKE_SCREEN);
+                    }
+                    if ((deviceKeys & deviceWakeKeys & DeviceKeysConstants.KEY_MASK_MENU) == 0) {
+                        keys.add(KEY_MENU_WAKE_SCREEN);
+                    }
+                    if ((deviceKeys & deviceWakeKeys & DeviceKeysConstants.KEY_MASK_ASSIST) == 0) {
+                        keys.add(KEY_ASSIST_WAKE_SCREEN);
+                    }
+                    if ((deviceKeys & deviceWakeKeys & DeviceKeysConstants.KEY_MASK_APP_SWITCH) == 0) {
+                        keys.add(KEY_APP_SWITCH_WAKE_SCREEN);
+                    }
+                    if ((deviceKeys & deviceWakeKeys & DeviceKeysConstants.KEY_MASK_VOLUME) == 0) {
+                        keys.add(KEY_VOLUME_WAKE_SCREEN);
+                    }
+
                     return keys;
                 }
 
