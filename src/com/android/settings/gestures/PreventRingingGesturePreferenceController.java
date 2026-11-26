@@ -102,8 +102,8 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
     @Override
     public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
         int preventRingingSetting = keyToSetting(preference.getKey());
-        if (preventRingingSetting != Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.VOLUME_HUSH_GESTURE, Settings.Secure.VOLUME_HUSH_VIBRATE)) {
+        PreventRingingGestureSettings.saveLastPreventRingingMode(mContext, preventRingingSetting);
+        if (preventRingingSetting != PreventRingingGestureSettings.getPreventRingingMode(mContext)) {
             Settings.Secure.putInt(mContext.getContentResolver(),
                     Settings.Secure.VOLUME_HUSH_GESTURE, preventRingingSetting);
         }
@@ -111,8 +111,11 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
 
     @Override
     public void updateState(Preference preference) {
-        int preventRingingSetting = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.VOLUME_HUSH_GESTURE, Settings.Secure.VOLUME_HUSH_VIBRATE);
+        int preventRingingSetting = PreventRingingGestureSettings.getPreventRingingMode(mContext);
+        if (preventRingingSetting != Settings.Secure.VOLUME_HUSH_OFF) {
+            PreventRingingGestureSettings.saveLastPreventRingingMode(
+                    mContext, preventRingingSetting);
+        }
         final boolean isVibrate = preventRingingSetting == Settings.Secure.VOLUME_HUSH_VIBRATE;
         final boolean isMute = preventRingingSetting == Settings.Secure.VOLUME_HUSH_MUTE;
         if (mVibratePref != null && mVibratePref.isChecked() != isVibrate) {

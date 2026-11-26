@@ -56,14 +56,9 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
             Preference pref = screen.findPreference(getPreferenceKey());
             if (pref != null) {
                 pref.setOnPreferenceClickListener(preference -> {
-                    int preventRinging = Settings.Secure.getInt(mContext.getContentResolver(),
-                            Settings.Secure.VOLUME_HUSH_GESTURE,
-                            Settings.Secure.VOLUME_HUSH_VIBRATE);
-                    boolean isChecked = preventRinging != Settings.Secure.VOLUME_HUSH_OFF;
-                    Settings.Secure.putInt(mContext.getContentResolver(),
-                            Settings.Secure.VOLUME_HUSH_GESTURE, isChecked
-                                    ? Settings.Secure.VOLUME_HUSH_OFF
-                                    : Settings.Secure.VOLUME_HUSH_VIBRATE);
+                    boolean isChecked = PreventRingingGestureSettings.getPreventRingingMode(mContext)
+                            != Settings.Secure.VOLUME_HUSH_OFF;
+                    PreventRingingGestureSettings.setPreventRingingEnabled(mContext, !isChecked);
                     return true;
                 });
                 mSwitch = (MainSwitchPreference) pref;
@@ -95,15 +90,6 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        final int preventRingingSetting = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.VOLUME_HUSH_GESTURE, Settings.Secure.VOLUME_HUSH_VIBRATE);
-        final int newRingingSetting = preventRingingSetting == Settings.Secure.VOLUME_HUSH_OFF
-                ? Settings.Secure.VOLUME_HUSH_VIBRATE
-                : preventRingingSetting;
-
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.VOLUME_HUSH_GESTURE, isChecked
-                        ? newRingingSetting
-                        : Settings.Secure.VOLUME_HUSH_OFF);
+        PreventRingingGestureSettings.setPreventRingingEnabled(mContext, isChecked);
     }
 }

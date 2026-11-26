@@ -18,7 +18,11 @@ package com.android.settings.gestures;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.provider.SearchIndexableResource;
+import android.provider.Settings;
+
+import androidx.preference.PreferenceManager;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -35,6 +39,43 @@ import java.util.List;
 public class PreventRingingGestureSettings extends DashboardFragment {
 
     private static final String TAG = "RingingGestureSettings";
+    private static final String PREF_LAST_PREVENT_RINGING_MODE =
+            "gesture_prevent_ringing_last_mode";
+
+    static int getPreventRingingMode(Context context) {
+        return Settings.Secure.getInt(context.getContentResolver(),
+                Settings.Secure.VOLUME_HUSH_GESTURE, Settings.Secure.VOLUME_HUSH_VIBRATE);
+    }
+
+    static int getLastPreventRingingMode(Context context) {
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        final int saved = prefs.getInt(
+                PREF_LAST_PREVENT_RINGING_MODE, Settings.Secure.VOLUME_HUSH_VIBRATE);
+        return saved != Settings.Secure.VOLUME_HUSH_OFF
+                ? saved : Settings.Secure.VOLUME_HUSH_VIBRATE;
+    }
+
+    static void saveLastPreventRingingMode(Context context, int mode) {
+        if (mode != Settings.Secure.VOLUME_HUSH_OFF) {
+            PreferenceManager.getDefaultSharedPreferences(context)
+                    .edit()
+                    .putInt(PREF_LAST_PREVENT_RINGING_MODE, mode)
+                    .apply();
+        }
+    }
+
+    static boolean setPreventRingingEnabled(Context context, boolean enabled) {
+        final int current = getPreventRingingMode(context);
+        if (enabled) {
+            final int target = current != Settings.Secure.VOLUME_HUSH_OFF
+                    ? current : getLastPreventRingingMode(context);
+            return Settings.Secure.putInt(context.getContentResolver(),
+                    Settings.Secure.VOLUME_HUSH_GESTURE, target);
+        }
+        saveLastPreventRingingMode(context, current);
+        return Settings.Secure.putInt(context.getContentResolver(),
+                Settings.Secure.VOLUME_HUSH_GESTURE, Settings.Secure.VOLUME_HUSH_OFF);
+    }
 
     @Override
     public void onAttach(Context context) {

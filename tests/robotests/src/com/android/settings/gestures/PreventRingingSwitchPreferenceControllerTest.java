@@ -158,6 +158,20 @@ public class PreventRingingSwitchPreferenceControllerTest {
     }
 
     @Test
+    public void onSwitchChanged_wasHushMute_toggledOffAndBackOn_returnHushMute() {
+        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
+                VOLUME_HUSH_MUTE);
+
+        mController.onCheckedChanged(null, false);
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.VOLUME_HUSH_GESTURE, UNKNOWN)).isEqualTo(VOLUME_HUSH_OFF);
+
+        mController.onCheckedChanged(null, true);
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.VOLUME_HUSH_GESTURE, UNKNOWN)).isEqualTo(VOLUME_HUSH_MUTE);
+    }
+
+    @Test
     public void testPreferenceClickListenerAttached() {
         PreferenceScreen preferenceScreen = mock(PreferenceScreen.class);
         MainSwitchPreference preference = mock(MainSwitchPreference.class);

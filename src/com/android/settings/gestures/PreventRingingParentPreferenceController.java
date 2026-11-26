@@ -76,16 +76,7 @@ public class PreventRingingParentPreferenceController extends TogglePreferenceCo
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        final int preventRingingSetting = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.VOLUME_HUSH_GESTURE, Settings.Secure.VOLUME_HUSH_VIBRATE);
-        final int newRingingSetting = preventRingingSetting == Settings.Secure.VOLUME_HUSH_OFF
-                ? Settings.Secure.VOLUME_HUSH_VIBRATE
-                : preventRingingSetting;
-
-        return Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.VOLUME_HUSH_GESTURE, isChecked
-                        ? newRingingSetting
-                        : Settings.Secure.VOLUME_HUSH_OFF);
+        return PreventRingingGestureSettings.setPreventRingingEnabled(mContext, isChecked);
     }
 
     @Override
