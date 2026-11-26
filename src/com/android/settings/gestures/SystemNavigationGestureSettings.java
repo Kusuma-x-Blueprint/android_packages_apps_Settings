@@ -232,14 +232,12 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         final Context context = getContext();
         if (KEY_SYSTEM_NAV_PHYSICAL_BUTTONS.equals(key)) {
             setCurrentSystemNavigationMode(mOverlayManager, KEY_SYSTEM_NAV_3BUTTONS);
-            LineageSettings.System.putIntForUser(context.getContentResolver(),
-                    LineageSettings.System.FORCE_SHOW_NAVBAR, 0, UserHandle.USER_CURRENT);
+            setForceShowNavbar(context, false);
             LineageHardwareManager.getInstance(context).set(
                     LineageHardwareManager.FEATURE_KEY_DISABLE, false);
         } else {
             if (SystemNavigationPreferenceController.isKeyDisablerSupported(context)) {
-                LineageSettings.System.putIntForUser(context.getContentResolver(),
-                        LineageSettings.System.FORCE_SHOW_NAVBAR, 1, UserHandle.USER_CURRENT);
+                setForceShowNavbar(context, true);
                 LineageHardwareManager.getInstance(context).set(
                         LineageHardwareManager.FEATURE_KEY_DISABLE, true);
             }
@@ -247,6 +245,15 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
         }
         setIllustrationVideo(mVideoPreference, key);
         return true;
+    }
+
+    private static void setForceShowNavbar(Context context, boolean forceShow) {
+        final int target = forceShow ? 1 : 0;
+        if (LineageSettings.System.getIntForUser(context.getContentResolver(),
+                LineageSettings.System.FORCE_SHOW_NAVBAR, 0, UserHandle.USER_CURRENT) != target) {
+            LineageSettings.System.putIntForUser(context.getContentResolver(),
+                    LineageSettings.System.FORCE_SHOW_NAVBAR, target, UserHandle.USER_CURRENT);
+        }
     }
 
     @Override
