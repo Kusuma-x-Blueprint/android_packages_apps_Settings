@@ -104,4 +104,10 @@
         android:title="@string/click_partial_screenshot_title"
         android:fragment="com.android.settings.gestures.ClickPartialScreenshotGestureSettings"
         settings:controller="com.android.settings.gestures.ClickPartialScreenshotPreferenceController" />
+
+    <Preference
+        android:key="gesture_quick_pulldown_summary"
+        android:title="@string/qs_quick_pulldown_title"
+        android:fragment="com.android.settings.gestures.QuickPulldownGestureSettings"
+        settings:controller="com.android.settings.gestures.QuickPulldownParentPreferenceController" />
 </PreferenceScreen>
