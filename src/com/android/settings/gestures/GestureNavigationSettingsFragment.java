@@ -62,6 +62,7 @@ public class GestureNavigationSettingsFragment extends DashboardFragment impleme
     private static final String RIGHT_EDGE_SEEKBAR_KEY = "gesture_right_back_sensitivity";
     private static final String GESTURE_TUTORIAL_KEY = "assistant_gesture_navigation_tutorial";
     private static final String KEY_EDGE_LONG_SWIPE = "navigation_bar_edge_long_swipe";
+    private static final String KEY_CORNER_SWIPE = "navigation_bar_corner_swipe_action";
     final Intent mLaunchTutorialIntent =  new Intent(ACTION_GESTURE_SANDBOX)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             .putExtra("use_tutorial_menu", true);
@@ -69,6 +70,7 @@ public class GestureNavigationSettingsFragment extends DashboardFragment impleme
     private WindowManager mWindowManager;
     private BackGestureIndicatorView mIndicatorView;
     private ListPreference mEdgeLongSwipeAction;
+    private ListPreference mCornerSwipeAction;
 
     private float[] mBackGestureInsetScales;
     private float mDefaultBackGestureInset;
@@ -121,6 +123,13 @@ public class GestureNavigationSettingsFragment extends DashboardFragment impleme
                 Action.NOTHING);
         mEdgeLongSwipeAction = initList(KEY_EDGE_LONG_SWIPE,
                 edgeLongSwipeAction, actionEntries, actionValues);
+
+        Action cornerSwipeAction = Action.fromSettings(
+                requireActivity().getContentResolver(),
+                LineageSettings.System.KEY_CORNER_SWIPE_ACTION,
+                Action.SEARCH);
+        mCornerSwipeAction = initList(KEY_CORNER_SWIPE,
+                cornerSwipeAction, actionEntries, actionValues);
     }
 
     @Override
@@ -188,14 +197,23 @@ public class GestureNavigationSettingsFragment extends DashboardFragment impleme
         return list;
     }
 
+    private void handleActionChange(ListPreference pref, Object newValue, String setting) {
+        String value = (String) newValue;
+        int index = pref.findIndexOfValue(value);
+        pref.setSummary(pref.getEntries()[index]);
+        LineageSettings.System.putInt(requireActivity().getContentResolver(), setting,
+                Integer.parseInt(value));
+    }
+
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mEdgeLongSwipeAction) {
-            String value = (String) newValue;
-            int index = mEdgeLongSwipeAction.findIndexOfValue(value);
-            mEdgeLongSwipeAction.setSummary(mEdgeLongSwipeAction.getEntries()[index]);
-            LineageSettings.System.putInt(requireActivity().getContentResolver(),
-                    LineageSettings.System.KEY_EDGE_LONG_SWIPE_ACTION, Integer.parseInt(value));
+            handleActionChange(mEdgeLongSwipeAction, newValue,
+                    LineageSettings.System.KEY_EDGE_LONG_SWIPE_ACTION);
+            return true;
+        } else if (preference == mCornerSwipeAction) {
+            handleActionChange(mCornerSwipeAction, newValue,
+                    LineageSettings.System.KEY_CORNER_SWIPE_ACTION);
             return true;
         }
         return false;
