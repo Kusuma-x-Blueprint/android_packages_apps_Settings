@@ -66,9 +66,9 @@
         />
 
         <ListPreference
-            android:key="navigation_bar_corner_swipe_action"
-            android:dialogTitle="@string/navigation_bar_corner_swipe_action_title"
-            android:title="@string/navigation_bar_corner_swipe_action_title"
+            android:key="navigation_bar_corner_long_swipe_action"
+            android:dialogTitle="@string/navigation_bar_corner_long_swipe_action_title"
+            android:title="@string/navigation_bar_corner_long_swipe_action_title"
             android:entries="@array/hardware_keys_action_entries"
             android:entryValues="@array/hardware_keys_action_values"
             android:persistent="false" />
