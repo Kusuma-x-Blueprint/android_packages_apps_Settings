@@ -25,16 +25,17 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
-public class QuickPulldownParentPreferenceController extends BasePreferenceController
+public class QuickPulldownParentPreferenceController extends TogglePreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
 
-    private Preference mPreference;
+    private PrimarySwitchPreference mPreference;
     private ContentObserver mSettingObserver;
 
     public QuickPulldownParentPreferenceController(@NonNull Context context,
@@ -45,6 +46,17 @@ public class QuickPulldownParentPreferenceController extends BasePreferenceContr
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
+    }
+
+    @Override
+    public boolean isChecked() {
+        return QuickPulldownGestureSettings.getPulldownMode(mContext)
+                != QuickPulldownGestureSettings.PULLDOWN_DIR_NONE;
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        return QuickPulldownGestureSettings.setPulldownEnabled(mContext, isChecked);
     }
 
     @Override
@@ -75,7 +87,15 @@ public class QuickPulldownParentPreferenceController extends BasePreferenceContr
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        refreshSummary(preference);
+        if (mPreference != null) {
+            mPreference.setChecked(isChecked());
+        }
+        preference.setSummary(getSummary());
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_system;
     }
 
     @Override
