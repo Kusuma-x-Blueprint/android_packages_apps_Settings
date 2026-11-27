@@ -21,8 +21,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.preference.PreferenceManager;
-
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
@@ -41,6 +39,7 @@ public class QsBrightnessSliderSettings extends DashboardFragment
         implements PreferenceControllerMixin {
 
     private static final String TAG = "QsBrightnessSliderSettings";
+    private static final String SHARED_PREF_NAME = "qs_brightness_slider_prefs";
     private static final String PREF_LAST_SHOW_MODE = "qs_show_brightness_slider_last_mode";
     private static final String KEY_AUTO_BRIGHTNESS_CATEGORY = "qs_show_auto_brightness_category";
     private static final String KEY_AUTO_BRIGHTNESS = "qs_show_auto_brightness";
@@ -57,14 +56,15 @@ public class QsBrightnessSliderSettings extends DashboardFragment
     }
 
     static int getLastShowMode(Context context) {
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        final SharedPreferences prefs = context.getSharedPreferences(
+                SHARED_PREF_NAME, Context.MODE_PRIVATE);
         final int saved = prefs.getInt(PREF_LAST_SHOW_MODE, SLIDER_EXPANDED);
         return saved != SLIDER_OFF ? saved : SLIDER_EXPANDED;
     }
 
     static void saveLastShowMode(Context context, int mode) {
         if (mode != SLIDER_OFF) {
-            PreferenceManager.getDefaultSharedPreferences(context)
+            context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
                     .edit()
                     .putInt(PREF_LAST_SHOW_MODE, mode)
                     .apply();

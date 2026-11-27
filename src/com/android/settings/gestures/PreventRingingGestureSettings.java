@@ -22,8 +22,6 @@ import android.content.SharedPreferences;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
-import androidx.preference.PreferenceManager;
-
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -39,6 +37,7 @@ import java.util.List;
 public class PreventRingingGestureSettings extends DashboardFragment {
 
     private static final String TAG = "RingingGestureSettings";
+    private static final String SHARED_PREF_NAME = "gesture_prevent_ringing_prefs";
     private static final String PREF_LAST_PREVENT_RINGING_MODE =
             "gesture_prevent_ringing_last_mode";
 
@@ -48,7 +47,8 @@ public class PreventRingingGestureSettings extends DashboardFragment {
     }
 
     static int getLastPreventRingingMode(Context context) {
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        final SharedPreferences prefs = context.getSharedPreferences(
+                SHARED_PREF_NAME, Context.MODE_PRIVATE);
         final int saved = prefs.getInt(
                 PREF_LAST_PREVENT_RINGING_MODE, Settings.Secure.VOLUME_HUSH_VIBRATE);
         return saved != Settings.Secure.VOLUME_HUSH_OFF
@@ -57,7 +57,7 @@ public class PreventRingingGestureSettings extends DashboardFragment {
 
     static void saveLastPreventRingingMode(Context context, int mode) {
         if (mode != Settings.Secure.VOLUME_HUSH_OFF) {
-            PreferenceManager.getDefaultSharedPreferences(context)
+            context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
                     .edit()
                     .putInt(PREF_LAST_PREVENT_RINGING_MODE, mode)
                     .apply();

@@ -91,5 +91,8 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         PreventRingingGestureSettings.setPreventRingingEnabled(mContext, isChecked);
+        if (mSwitch != null && mSwitch.isChecked() != isChecked) {
+            mSwitch.setChecked(isChecked);
+        }
     }
 }

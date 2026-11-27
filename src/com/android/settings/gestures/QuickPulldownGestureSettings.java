@@ -26,8 +26,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 
-import androidx.preference.PreferenceManager;
-
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
@@ -46,6 +44,7 @@ public class QuickPulldownGestureSettings extends DashboardFragment
         implements PreferenceControllerMixin {
 
     private static final String TAG = "QuickPulldownGestureSettings";
+    private static final String SHARED_PREF_NAME = "qs_quick_pulldown_prefs";
     private static final String PREF_LAST_PULLDOWN_SIDE = "qs_quick_pulldown_last_side";
 
     static final int PULLDOWN_DIR_NONE = 0;
@@ -58,14 +57,15 @@ public class QuickPulldownGestureSettings extends DashboardFragment
     }
 
     static int getLastSide(Context context) {
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        final SharedPreferences prefs = context.getSharedPreferences(
+                SHARED_PREF_NAME, Context.MODE_PRIVATE);
         final int saved = prefs.getInt(PREF_LAST_PULLDOWN_SIDE, PULLDOWN_DIR_RIGHT);
         return saved != PULLDOWN_DIR_NONE ? saved : PULLDOWN_DIR_RIGHT;
     }
 
     static void saveLastSide(Context context, int side) {
         if (side != PULLDOWN_DIR_NONE) {
-            PreferenceManager.getDefaultSharedPreferences(context)
+            context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
                     .edit()
                     .putInt(PREF_LAST_PULLDOWN_SIDE, side)
                     .apply();
