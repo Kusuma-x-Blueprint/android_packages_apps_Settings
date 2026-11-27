@@ -112,12 +112,17 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
     @Override
     public void updateState(Preference preference) {
         int preventRingingSetting = PreventRingingGestureSettings.getPreventRingingMode(mContext);
-        if (preventRingingSetting != Settings.Secure.VOLUME_HUSH_OFF) {
+        final boolean isEnabled = preventRingingSetting != Settings.Secure.VOLUME_HUSH_OFF;
+        final int selectedMode;
+        if (isEnabled) {
             PreventRingingGestureSettings.saveLastPreventRingingMode(
                     mContext, preventRingingSetting);
+            selectedMode = preventRingingSetting;
+        } else {
+            selectedMode = PreventRingingGestureSettings.getLastPreventRingingMode(mContext);
         }
-        final boolean isVibrate = preventRingingSetting == Settings.Secure.VOLUME_HUSH_VIBRATE;
-        final boolean isMute = preventRingingSetting == Settings.Secure.VOLUME_HUSH_MUTE;
+        final boolean isVibrate = selectedMode == Settings.Secure.VOLUME_HUSH_VIBRATE;
+        final boolean isMute = selectedMode == Settings.Secure.VOLUME_HUSH_MUTE;
         if (mVibratePref != null && mVibratePref.isChecked() != isVibrate) {
             mVibratePref.setChecked(isVibrate);
         }
@@ -125,13 +130,8 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
             mMutePref.setChecked(isMute);
         }
 
-        if (preventRingingSetting == Settings.Secure.VOLUME_HUSH_OFF) {
-            mVibratePref.setEnabled(false);
-            mMutePref.setEnabled(false);
-        } else {
-            mVibratePref.setEnabled(true);
-            mMutePref.setEnabled(true);
-        }
+        mVibratePref.setEnabled(isEnabled);
+        mMutePref.setEnabled(isEnabled);
     }
 
     @Override

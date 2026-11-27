@@ -16,7 +16,12 @@
 
 package com.android.settings.gestures;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -28,20 +33,33 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.widget.MainSwitchPreference;
 
 public class PreventRingingSwitchPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, OnCheckedChangeListener {
+        implements PreferenceControllerMixin, OnCheckedChangeListener,
+        LifecycleObserver, OnResume, OnPause {
 
     private static final String KEY = "gesture_prevent_ringing_switch";
     private final Context mContext;
 
     @VisibleForTesting
     MainSwitchPreference mSwitch;
+    private SettingObserver mSettingObserver;
 
     public PreventRingingSwitchPreferenceController(Context context) {
+        this(context, null);
+    }
+
+    public PreventRingingSwitchPreferenceController(Context context, Lifecycle lifecycle) {
         super(context);
         mContext = context;
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
     }
 
     @Override
@@ -64,6 +82,7 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
                 mSwitch = (MainSwitchPreference) pref;
                 mSwitch.setTitle(mContext.getString(R.string.prevent_ringing_main_switch_title));
                 mSwitch.addOnSwitchChangeListener(this);
+                mSettingObserver = new SettingObserver(mSwitch);
                 updateState(mSwitch);
             }
         }
@@ -77,8 +96,7 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
 
     @Override
     public void updateState(Preference preference) {
-        int preventRingingSetting = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.VOLUME_HUSH_GESTURE, Settings.Secure.VOLUME_HUSH_VIBRATE);
+        int preventRingingSetting = PreventRingingGestureSettings.getPreventRingingMode(mContext);
         setChecked(preventRingingSetting != Settings.Secure.VOLUME_HUSH_OFF);
     }
 
@@ -91,8 +109,47 @@ public class PreventRingingSwitchPreferenceController extends AbstractPreference
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         PreventRingingGestureSettings.setPreventRingingEnabled(mContext, isChecked);
-        if (mSwitch != null && mSwitch.isChecked() != isChecked) {
-            mSwitch.setChecked(isChecked);
+    }
+
+    @Override
+    public void onResume() {
+        if (mSettingObserver != null) {
+            mSettingObserver.register(mContext.getContentResolver());
+            mSettingObserver.onChange(false, null);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if (mSettingObserver != null) {
+            mSettingObserver.unregister(mContext.getContentResolver());
+        }
+    }
+
+    private class SettingObserver extends ContentObserver {
+        private final Uri VOLUME_HUSH_URI = Settings.Secure.getUriFor(
+                Settings.Secure.VOLUME_HUSH_GESTURE);
+        private final Preference mPreference;
+
+        SettingObserver(Preference preference) {
+            super(new Handler(Looper.getMainLooper()));
+            mPreference = preference;
+        }
+
+        void register(ContentResolver cr) {
+            cr.registerContentObserver(VOLUME_HUSH_URI, false, this);
+        }
+
+        void unregister(ContentResolver cr) {
+            cr.unregisterContentObserver(this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            super.onChange(selfChange, uri);
+            if (uri == null || VOLUME_HUSH_URI.equals(uri)) {
+                updateState(mPreference);
+            }
         }
     }
 }

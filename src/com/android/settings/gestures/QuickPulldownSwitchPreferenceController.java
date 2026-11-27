@@ -87,9 +87,6 @@ public class QuickPulldownSwitchPreferenceController extends AbstractPreferenceC
         if (isChecked != currentlyChecked) {
             QuickPulldownGestureSettings.setPulldownEnabled(mContext, isChecked);
         }
-        if (mSwitch != null && mSwitch.isChecked() != isChecked) {
-            mSwitch.setChecked(isChecked);
-        }
     }
 
     @Override

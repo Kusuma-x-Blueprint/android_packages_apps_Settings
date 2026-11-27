@@ -94,9 +94,6 @@ public class QsBrightnessSliderSwitchPreferenceController extends AbstractPrefer
         if (isChecked != currentlyChecked) {
             QsBrightnessSliderSettings.setSliderEnabled(mContext, isChecked);
         }
-        if (mSwitch != null && mSwitch.isChecked() != isChecked) {
-            mSwitch.setChecked(isChecked);
-        }
     }
 
     @Override

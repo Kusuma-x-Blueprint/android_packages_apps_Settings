@@ -107,8 +107,21 @@ public class PreventRingingGesturePreferenceControllerTest {
         mController.updateState(mPreference);
         assertThat(mController.mVibratePref.isEnabled()).isFalse();
         assertThat(mController.mMutePref.isEnabled()).isFalse();
-        assertThat(mController.mVibratePref.isChecked()).isFalse();
+        assertThat(mController.mVibratePref.isChecked()).isTrue();
         assertThat(mController.mMutePref.isChecked()).isFalse();
+    }
+
+    @Test
+    public void testUpdateState_off_preservesLastMute() {
+        PreventRingingGestureSettings.saveLastPreventRingingMode(
+                mContext, Settings.Secure.VOLUME_HUSH_MUTE);
+        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
+                Settings.Secure.VOLUME_HUSH_OFF);
+        mController.updateState(mPreference);
+        assertThat(mController.mVibratePref.isEnabled()).isFalse();
+        assertThat(mController.mMutePref.isEnabled()).isFalse();
+        assertThat(mController.mVibratePref.isChecked()).isFalse();
+        assertThat(mController.mMutePref.isChecked()).isTrue();
     }
 
     @Test

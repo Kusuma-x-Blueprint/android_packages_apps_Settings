@@ -91,7 +91,7 @@ public class PreventRingingGestureSettings extends DashboardFragment {
             Lifecycle lifecycle) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new PreventRingingGesturePreferenceController(context, lifecycle));
-        controllers.add(new PreventRingingSwitchPreferenceController(context));
+        controllers.add(new PreventRingingSwitchPreferenceController(context, lifecycle));
         return controllers;
     }
 
