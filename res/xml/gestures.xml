@@ -93,11 +93,12 @@
         android:fragment="com.android.settings.gestures.PreventRingingGestureSettings"
         settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
 
-    <com.android.settingslib.PrimarySwitchPreference
-        android:key="gesture_torch_long_press_power_summary"
-        android:title="@string/torch_long_press_power_gesture_title"
-        android:fragment="com.android.settings.gestures.TorchLongPressPowerGestureSettings"
-        settings:controller="com.android.settings.gestures.TorchLongPressPowerParentPreferenceController" />
+    <lineageos.preference.extra.LineagePartsLineageSystemSettingPrimarySwitchPreference
+        android:key="torch_long_press_power"
+        android:defaultValue="false"
+        settings:settingKey="torch_long_press_power_gesture"
+        settings:requiresConfig="@*android:bool/config_supportLongPressPowerWhenNonInteractive"
+        settings:controller="com.android.settings.gestures.TorchLongPressPowerPreferenceController" />
 
     <Preference
         android:key="gesture_volume_button_music_controls_summary"
