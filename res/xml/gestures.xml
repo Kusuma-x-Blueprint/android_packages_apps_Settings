@@ -112,9 +112,6 @@
         android:fragment="com.android.settings.gestures.ClickPartialScreenshotGestureSettings"
         settings:controller="com.android.settings.gestures.ClickPartialScreenshotPreferenceController" />
 
-    <com.android.settingslib.PrimarySwitchPreference
-        android:key="gesture_quick_pulldown_summary"
-        android:title="@string/qs_quick_pulldown_title"
-        android:fragment="com.android.settings.gestures.QuickPulldownGestureSettings"
-        settings:controller="com.android.settings.gestures.QuickPulldownParentPreferenceController" />
+    <lineageos.preference.extra.LineagePartsPrimarySwitchPreference
+        android:key="quick_pulldown" />
 </PreferenceScreen>
