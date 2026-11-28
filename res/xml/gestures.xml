@@ -100,11 +100,11 @@
         settings:requiresConfig="@*android:bool/config_supportLongPressPowerWhenNonInteractive"
         settings:controller="com.android.settings.gestures.TorchLongPressPowerPreferenceController" />
 
-    <Preference
-        android:key="gesture_volume_button_music_controls_summary"
-        android:title="@string/volbtn_music_controls_title"
-        android:fragment="com.android.settings.gestures.VolumeButtonMusicControlsGestureSettings"
-        settings:controller="com.android.settings.gestures.VolumeButtonMusicControlsPreferenceController" />
+    <lineageos.preference.LineagePartsPreference
+        android:key="volume_button_music_controls"
+        settings:requiresConfig="@*lineageos.platform:integer/config_deviceHardwareKeys"
+        settings:requiresConfigMask="64"
+        settings:searchable="false" />
 
     <Preference
         android:key="gesture_click_partial_screenshot_summary"
