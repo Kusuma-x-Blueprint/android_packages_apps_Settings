@@ -106,11 +106,11 @@
         settings:requiresConfigMask="64"
         settings:searchable="false" />
 
-    <Preference
-        android:key="gesture_click_partial_screenshot_summary"
-        android:title="@string/click_partial_screenshot_title"
-        android:fragment="com.android.settings.gestures.ClickPartialScreenshotGestureSettings"
-        settings:controller="com.android.settings.gestures.ClickPartialScreenshotPreferenceController" />
+    <lineageos.preference.LineagePartsPreference
+        android:key="click_partial_screenshot_settings"
+        settings:requiresConfig="@*lineageos.platform:integer/config_deviceHardwareKeys"
+        settings:requiresConfigMask="64"
+        settings:searchable="false" />
 
     <lineageos.preference.extra.LineagePartsPrimarySwitchPreference
         android:key="quick_pulldown" />
